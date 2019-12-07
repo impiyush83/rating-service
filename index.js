@@ -7,7 +7,7 @@ const Constants = require('./lib/constants')
 const ProductRoutes = require('./lib/routes/ProductRoutes')
 const UserRoutes = require('./lib/routes/UserRoutes')
 const RatingRoutes = require('./lib/routes/RatingRoutes')
-const MongoConnection = require('./lib/database/connect')
+const MongoConnection = require('./lib/dao/connect')
 
 const _init = async function () {
 

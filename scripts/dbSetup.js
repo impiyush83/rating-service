@@ -1,8 +1,8 @@
 const products = require('./products.json')
 const users = require('./users.json')
-const MongoConnection = require('../lib/database/connect')
-const dbProduct = require('../lib/database/models/product')
-const dbUser = require('../lib/database/models/user')
+const MongoConnection = require('../lib/dao/connect')
+const dbProduct = require('../lib/dao/models/product')
+const dbUser = require('../lib/dao/models/user')
 
 const addProducts = async function (products) {
   // clear entries
