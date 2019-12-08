@@ -8,6 +8,7 @@ const ProductRoutes = require('./lib/routes/ProductRoutes')
 const UserRoutes = require('./lib/routes/UserRoutes')
 const RatingRoutes = require('./lib/routes/RatingRoutes')
 const MongoConnection = require('./lib/dao/connect')
+const RedisConnection = require('./lib/cache')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
 const _init = async function () {
