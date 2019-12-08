@@ -8,16 +8,13 @@ const ProductRoutes = require('./lib/routes/ProductRoutes')
 const UserRoutes = require('./lib/routes/UserRoutes')
 const RatingRoutes = require('./lib/routes/RatingRoutes')
 const MongoConnection = require('./lib/dao/connect')
-const RedisConnection = require('./lib/cache')
 const { celebrate, Joi, errors, Segments } = require('celebrate')
 const CronMailer = require('./lib/cron')
 const Cron = require('node-cron')
 const Sync = require('./lib/cache/syncProductRatings')
 
 const _init = async function () {
-
   await MongoConnection.init()
-
   // Parse various different custom JSON types as JSON
   app.use(bodyParser.json({ type: 'application/json' }))
 
@@ -30,14 +27,17 @@ const _init = async function () {
   // Turn on the server.
   app.listen(Constants.SERVER.PORT, () => console.log(`App listening on port ${Constants.SERVER.PORT}`))
 
-  // CronMailer.transporter.sendMail(CronMailer.mailOptions, function (error, info) {
-  //   console.log(info.messageId);
-  //   if (err) {
-  //       console.log(err);
-  //   }
-  // })
+  // send a mail to admin after successful working of cron job 
+  CronMailer.transporter.sendMail(CronMailer.mailOptions, function (error, info) {
+    if (error) {
+        console.log(error)
+    }
+  })
+
+  // cron job to handle sync of ratings per minute
+  Cron.schedule('1 * * * *', await Sync.syncProductRatings())
 }
-  // Cron.schedule('* * * * *', Sync.syncProductRatings())
+ 
 try {
   _init()
 } catch (err) {
