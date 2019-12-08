@@ -8,6 +8,7 @@ const ProductRoutes = require('./lib/routes/ProductRoutes')
 const UserRoutes = require('./lib/routes/UserRoutes')
 const RatingRoutes = require('./lib/routes/RatingRoutes')
 const MongoConnection = require('./lib/dao/connect')
+const { celebrate, Joi, errors, Segments } = require('celebrate');
 
 const _init = async function () {
 
@@ -17,10 +18,10 @@ const _init = async function () {
   app.use(bodyParser.json({ type: 'application/json' }))
 
   // Connect all our routes to our application.
-  app.use('/product', ProductRoutes)
-  app.use('/user', UserRoutes)
-  app.use('/rating', RatingRoutes)
-
+  app.use('/', ProductRoutes)
+  app.use('/', UserRoutes)
+  app.use('/', RatingRoutes)
+  app.use(errors())
 
   // Turn on the server.
   app.listen(Constants.SERVER.PORT, () => console.log(`App listening on port ${Constants.SERVER.PORT}`))
