@@ -33,12 +33,11 @@ const _init = async function () {
   })
   
   // cron job to handle sync of ratings per 20 secs
-  const job = new CronJob('*/20 * * * * *', async () => {
+  const job = new CronJob('*/30 * * * * *', async () => {
 	  const d = new Date()
-    console.log('Every Twenty Seconds:', d)
+    console.log('Syncs Every Thirty Seconds:', d)
     await Sync.syncProductRatings()
   },null, true)
-  console.log('After job instantiation');
   job.start()
   
   // Turn on the server.

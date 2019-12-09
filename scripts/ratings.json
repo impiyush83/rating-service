@@ -3,6 +3,11 @@
          "userId": "1",
          "productId": "1",
          "rating": "ONESTAR" 
-    }
+    },
+    {
+          "userId": "1",
+          "productId": "2",
+          "rating": "THREESTAR" 
+     }
  ]
  
