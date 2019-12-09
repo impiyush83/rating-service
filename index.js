@@ -10,7 +10,7 @@ const RatingRoutes = require('./lib/routes/RatingRoutes')
 const MongoConnection = require('./lib/dao/connect')
 const { celebrate, Joi, errors, Segments } = require('celebrate')
 const CronMailer = require('./lib/cron')
-const Cron = require('node-cron')
+const CronJob = require('cron').CronJob
 const Sync = require('./lib/cache/syncProductRatings')
 
 const _init = async function () {
@@ -24,25 +24,31 @@ const _init = async function () {
   app.use('/', RatingRoutes)
   app.use(errors())
 
+  // cron job start 
+    // send a mail to admin after successful working of cron job 
+  CronMailer.transporter.sendMail(CronMailer.mailOptions, function (error, info) {
+      if (error) {
+          console.log(error)
+      }
+  })
+  
+  // cron job to handle sync of ratings per 20 secs
+  const job = new CronJob('*/20 * * * * *', async () => {
+	  const d = new Date()
+    console.log('Every Twenty Seconds:', d)
+    await Sync.syncProductRatings()
+  },null, true)
+  console.log('After job instantiation');
+  job.start()
+  
   // Turn on the server.
   app.listen(Constants.SERVER.PORT, () => console.log(`App listening on port ${Constants.SERVER.PORT}`))
-
-  // send a mail to admin after successful working of cron job 
-  CronMailer.transporter.sendMail(CronMailer.mailOptions, function (error, info) {
-    if (error) {
-        console.log(error)
-    }
-  })
-
-  // cron job to handle sync of ratings per minute
-  Cron.schedule('1 * * * *', await Sync.syncProductRatings())
 }
  
 try {
   _init()
 } catch (err) {
   console.log(`Something went wrong while starting up the server. Exiting.\nError: ${JSON.stringify(err)}`)
-
   // Note: If something goes wrong while starting up the server (like mongo connection failure),
   // then server startup is terminated explicitly.
   process.exit(1)
