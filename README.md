@@ -48,6 +48,7 @@ A web-server (with HTTP APIs) that handles all tasks required for a rating servi
 
 ## Schema 
 
+- Used https://github.com/arb/celebrate for schema validation.
 - Ratings Schema
 
     ```
