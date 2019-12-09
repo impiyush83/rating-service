@@ -6,9 +6,10 @@ A web-server (with HTTP APIs) that handles all tasks required for a rating servi
 1. Install Node.js version ```8.9.1```
 2. Install MongoDB Community Server edition version ```3.3.5```.
 3. On command line type ```mongo``` and hit enter. (Will run Mongo on its default port ```27017```)
-4. Go to root directory of *rating-service* project.
-5. On command line type ```npm install``` and hit enter.
-6. On command line type ```npm start``` and hit enter.
+4. On command line type ```redis-server``` and hit enter. (Will run Redis on its default port ```6379```)
+5. Go to root directory of *rating-service* project.
+6. On command line type ```npm install``` and hit enter.
+7. On command line type ```npm start``` and hit enter.
 - Yay! 🎉 our server is up and running on default port ```3000```.
 - Go through below docs, to understand the ```Entities``` and supported ```API```'s.
 - Optional: You can also run test cases by ```npm test```.
