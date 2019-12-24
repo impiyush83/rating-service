@@ -42,7 +42,7 @@ A web-server (with HTTP APIs) that handles all tasks required for a rating servi
 ## Entities:
 
 - User, Product, Ratings are the 3 collections formed. We have separated out Ratings Schema by which the document size of product and  user wont exceed the max limit 16MB if number of ratings increase. 
--  The  productId  and UserId are  *String Type* Because in JS (as most of our web clients would be in JS) the Number cannot go beyond **9007199254740991**. So we don't want to limit the number of records in our table by mere **JS language's data type limitation**! That's why all id's are choosen to be of *String* data type.
+-  The  productId  and UserId are  *String Type* Because in JS (as most of our web clients would be in JS) the Number cannot go beyond **9007199254740992**  **ie. 2^53**.  So we don't want to limit the number of records in our table by mere **JS language's data type limitation**! That's why all id's are choosen to be of *String* data type.
 
 ---
 
