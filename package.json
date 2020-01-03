@@ -48,9 +48,8 @@
     "simple-mock": "0.8.0"
   },
   "keywords": [
-    "irctc",
-    "travel",
-    "paths"
+    "rating",
+    "recommendation"
   ],
   "author": "Piyush Nalawade",
   "license": "ISC",
