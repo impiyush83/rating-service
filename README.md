@@ -17,7 +17,7 @@ A web-server (with HTTP APIs) that handles all tasks required for a rating servi
 -----
 
 # Architecture 
-![alt text](https://raw.githubusercontent.com/impiyush83/rating-service/master/architecture.png)
+![alt text](https://raw.githubusercontent.com/impiyush83/rating-service/blob/master/architecture.png)
 
 
 ## Assumptions
